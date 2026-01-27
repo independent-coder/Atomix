@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Atomix - Interactive Periodic Table of Elements</title>
+    
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="Explore the fascinating world of chemistry with 118 interactive elements, real-time visualizations, and comprehensive chemical data.">
+    <meta name="keywords" content="periodic table, chemistry, elements, science education, interactive, atoms, molecules, chemical elements, learning, students, teachers">
+    <meta name="author" content="Independent-Coder">
+    <meta name="robots" content="index, follow">
+    <meta name="language" content="English">
+    <meta name="revisit-after" content="7 days">
+    <meta name="theme-color" content="#7c4dff">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://independent-coder.github.io/independent-coder/">
+    <meta property="og:title" content="Atomix - Interactive Periodic Table of Elements">
+    <meta property="og:description" content="Explore the fascinating world of chemistry with 118 interactive elements, real-time visualizations, and comprehensive chemical data.">
+    <meta property="og:image" content="https://independent-coder.github.io/independent-coder/assets/og-image.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:image:alt" content="Atomix Interactive Periodic Table">
+    <meta property="og:site_name" content="Atomix">
+    <meta property="og:locale" content="en_US">
+    
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://independent-coder.github.io/independent-coder/">
+    <meta property="twitter:title" content="Atomix - Interactive Periodic Table of Elements">
+    <meta property="twitter:description" content="Explore the fascinating world of chemistry with 118 interactive elements, real-time visualizations, and comprehensive chemical data.">
+    <meta property="twitter:image" content="https://independent-coder.github.io/independent-coder/assets/og-image.png">
+    <meta property="twitter:image:alt" content="Atomix Interactive Periodic Table">
+    
+    <!-- Additional SEO Tags -->
+    <meta name="application-name" content="Atomix">
+    <meta name="apple-mobile-web-app-title" content="Atomix">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="theme-color" content="#7c4dff">
+
+
+    
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://independent-coder.github.io/independent-coder/">
+    
+    <!-- Favicon and App Icons -->
+    <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+    
+    <!-- Preconnect for Performance -->
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="dns-prefetch" href="https://en.wikipedia.org">
+    
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+    
+    <!-- Structured Data (JSON-LD) -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebApplication",
+        "name": "Atomix",
+        "description": "Interactive periodic table of elements with 118 chemical elements, search, filtering, and comprehensive chemistry data.",
+        "url": "https://independent-coder.github.io/independent-coder/",
+        "applicationCategory": "EducationalApplication",
+        "operatingSystem": "Web Browser",
+        "offers": {
+            "@type": "Offer",
+            "price": "0",
+            "priceCurrency": "USD"
+        },
+        "creator": {
+            "@type": "Person",
+            "name": "Independent-Coder",
+            "url": "https://github.com/independent-coder"
+        },
+        "educationalUse": "instruction",
+        "learningResourceType": "interactive tool",
+        "audience": {
+            "@type": "EducationalAudience",
+            "educationalRole": "student"
+        },
+        "about": {
+            "@type": "Thing",
+            "name": "Chemistry",
+            "description": "The study of matter and the changes it undergoes"
+        }
+    }
+    </script>
+</head>
+<body>
+    <header>
+        <h1><i class="fas fa-atom"></i> Atomix</h1>
+        <p>Interactive Periodic Table of Elements</p>
+    </header>
+
+    <main>
+        <section class="controls">
+            <div class="search-container">
+                <i class="fas fa-search"></i>
+                <input type="text" id="searchInput" placeholder="Search elements by name, symbol, or atomic number..." alt="Search elements by name, symbol, or atomic number">
+                <button id="clearSearch"><i class="fas fa-times"></i></button>
+            </div>
+            
+            <div class="filter-container">
+                <select id="categoryFilter">
+                    <option value="all">All Elements</option>
+                    <option value="alkali-metal">Alkali Metals</option>
+                    <option value="alkaline-earth-metal">Alkaline Earth Metals</option>
+                    <option value="transition-metal">Transition Metals</option>
+                    <option value="metalloid">Metalloids</option>
+                    <option value="post-transition-metal">Post-Transition Metals</option>
+                    <option value="nonmetal">Nonmetals</option>
+                    <option value="halogen">Halogens</option>
+                    <option value="noble-gas">Noble Gases</option>
+                    <option value="lanthanide">Lanthanides</option>
+                    <option value="actinide">Actinides</option>
+                </select>
+            </div>
+        </section>
+
+        <div class="periodic-table-container">
+            <section class="periodic-table" id="periodicTable">
+                <!-- Elements will be dynamically generated here -->
+            </section>
+        </div>
+
+        <!-- About Section -->
+        <section class="about">
+            <h2>What is Atomix?</h2>
+            <p>
+                Atomix is an interactive periodic table of elements built with modern web technologies. 
+                It allows you to explore all 118 chemical elements with real-time visualizations, 
+                comprehensive data, and intuitive interactions. Features include color-coded element categories, 
+                advanced search and filtering, interactive hover tooltips with detailed information, 
+                and direct Wikipedia links for deeper learning. The application also includes a comprehensive 
+                chemistry glossary covering element categories, atomic properties, and fundamental chemical concepts. 
+                Perfect for students, educators, and science enthusiasts, Atomix makes learning chemistry 
+                engaging and accessible with its sleek dark theme design and fully responsive layout.
+            </p>
+        </section>
+
+        <div class="tooltip" id="tooltip"></div>
+    </main>
+
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3 class="footer-title">
+                    <i class="fas fa-atom"></i>
+                    Atomix
+                </h3>
+                <p class="footer-description">
+                    Interactive Periodic Table of Elements with dynamic visuals and comprehensive element information.
+                </p>
+                <div class="footer-links">
+                    <a href="https://github.com/independent-coder/Atomix" target="_blank" class="footer-link">
+                        <i class="fab fa-github"></i>
+                        GitHub Repository
+                    </a>
+                    <button class="glossary-toggle" onclick="toggleGlossary()">
+                        <i class="fas fa-book"></i>
+                        View Glossary
+                    </button>
+                </div>
+            </div>
+            
+            <div class="footer-section">
+                <h4 class="footer-heading">Features</h4>
+                <ul class="footer-list">
+                    <li><i class="fas fa-search"></i> Advanced Search & Filter</li>
+                    <li><i class="fas fa-mouse-pointer"></i> Interactive Hover Tooltips</li>
+                    <li><i class="fas fa-palette"></i> Color-Coded Categories</li>
+                    <li><i class="fas fa-mobile-alt"></i> Fully Responsive Design</li>
+                </ul>
+            </div>
+            
+            <div class="footer-section">
+                <h4 class="footer-heading">Technologies</h4>
+                <ul class="footer-list">
+                    <li><i class="fas fa-code"></i> Vanilla JavaScript</li>
+                    <li><i class="fas fa-paint-brush"></i> Modern CSS3</li>
+                    <li><i class="fas fa-font"></i> FontAwesome Icons</li>
+                    <li><i class="fas fa-object-group"></i> Glassmorphism Design</li>
+                </ul>
+            </div>
+            
+            <div class="footer-section">
+                <h4 class="footer-heading">Connect</h4>
+                <div class="social-links">
+                    <a href="https://github.com/independent-coder" target="_blank" class="social-link" title="GitHub">
+                        <i class="fab fa-github"></i>
+                    </a>
+                    <a href="https://independent-coder.github.io/independent-coder/" target="_blank" class="social-link" title="My Website">
+                        <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Glossary Section -->
+        <div class="glossary-section" id="glossarySection">
+            <div class="glossary-content">
+                <h3 class="glossary-title">
+                    <i class="fas fa-flask"></i>
+                    Chemistry Glossary
+                </h3>
+                
+                <div class="glossary-grid">
+                    <div class="glossary-category">
+                        <h4><i class="fas fa-layer-group"></i> Element Categories</h4>
+                        <dl>
+                            <dt>Alkali Metals</dt>
+                            <dd>Group 1 elements, highly reactive, soft metals</dd>
+                            
+                            <dt>Alkaline Earth Metals</dt>
+                            <dd>Group 2 elements, reactive but less than alkali metals</dd>
+                            
+                            <dt>Transition Metals</dt>
+                            <dd>Groups 3-12, typical metallic properties, form colored compounds</dd>
+                            
+                            <dt>Metalloids</dt>
+                            <dd>Elements with properties intermediate between metals and nonmetals</dd>
+                            
+                            <dt>Post-Transition Metals</dt>
+                            <dd>Metallic elements located to the right of transition metals</dd>
+                            
+                            <dt>Nonmetals</dt>
+                            <dd>Elements lacking metallic properties, poor conductors</dd>
+                            
+                            <dt>Halogens</dt>
+                            <dd>Group 17 elements, highly reactive nonmetals</dd>
+                            
+                            <dt>Noble Gases</dt>
+                            <dd>Group 18 elements, chemically inert under normal conditions</dd>
+                            
+                            <dt>Lanthanides</dt>
+                            <dd>Elements 57-71, f-block, similar chemical properties</dd>
+                            
+                            <dt>Actinides</dt>
+                            <dd>Elements 89-103, f-block, all radioactive</dd>
+                        </dl>
+                    </div>
+                    
+                    <div class="glossary-category">
+                        <h4><i class="fas fa-atom"></i> Atomic Properties</h4>
+                        <dl>
+                            <dt>Atomic Number</dt>
+                            <dd>Number of protons in an atom's nucleus</dd>
+                            
+                            <dt>Atomic Mass</dt>
+                            <dd>Total mass of protons, neutrons, and electrons in an atom</dd>
+                            
+                            <dt>Period</dt>
+                            <dd>Horizontal row in the periodic table</dd>
+                            
+                            <dt>Group</dt>
+                            <dd>Vertical column in the periodic table</dd>
+                            
+                            <dt>Valence Electrons</dt>
+                            <dd>Electrons in the outermost shell, determine chemical reactivity</dd>
+                            
+                            <dt>Electronegativity</dt>
+                            <dd>Tendency of an atom to attract electrons in a chemical bond</dd>
+                            
+                            <dt>Ionization Energy</dt>
+                            <dd>Energy required to remove an electron from an atom</dd>
+                        </dl>
+                    </div>
+                    
+                    <div class="glossary-category">
+                        <h4><i class="fas fa-vial"></i> Chemical Concepts</h4>
+                        <dl>
+                            <dt>Element</dt>
+                            <dd>Pure substance consisting of only one type of atom</dd>
+                            
+                            <dt>Compound</dt>
+                            <dd>Substance formed from two or more elements chemically bonded</dd>
+                            
+                            <dt>Molecule</dt>
+                            <dd>Group of atoms bonded together, smallest unit of a compound</dd>
+                            
+                            <dt>Isotope</dt>
+                            <dd>Atoms of same element with different numbers of neutrons</dd>
+                            
+                            <dt>Ion</dt>
+                            <dd>Atom or molecule with electrical charge due to gain/loss of electrons</dd>
+                            
+                            <dt>Chemical Bond</dt>
+                            <dd>Attraction between atoms that enables formation of chemical substances</dd>
+                            
+                            <dt>Periodic Law</dt>
+                            <dd>Properties of elements repeat periodically with increasing atomic number</dd>
+                        </dl>
+                    </div>
+                </div>
+                
+                <button class="glossary-close" onclick="toggleGlossary()">
+                    <i class="fas fa-times"></i>
+                    Close Glossary
+                </button>
+            </div>
+        </div>
+        
+        <div class="footer-bottom">
+            <div class="footer-bottom-content">
+                <p class="copyright">
+                    <i class="far fa-copyright"></i>
+                    2026 Atomix v1.0.0. All rights reserved. 
+                </p>
+                <p class="made-by">
+                    Made with <i class="fas fa-heart"></i> by 
+                    <a href="https://github.com/independent-coder" target="_blank">Independent-Coder</a>
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
