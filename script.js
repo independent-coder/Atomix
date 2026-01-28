@@ -120,17 +120,209 @@ const elements = [
     { symbol: "Og", name: "Oganesson", atomicNumber: 118, atomicMass: 294.00, category: "noble-gas", period: 7, group: 18 }
 ];
 
+const electronegativityBySymbol = {
+    H: 2.20,
+    He: null,
+    Li: 0.98,
+    Be: 1.57,
+    B: 2.04,
+    C: 2.55,
+    N: 3.04,
+    O: 3.44,
+    F: 3.98,
+    Ne: null,
+    Na: 0.93,
+    Mg: 1.31,
+    Al: 1.61,
+    Si: 1.90,
+    P: 2.19,
+    S: 2.58,
+    Cl: 3.16,
+    Ar: null,
+    K: 0.82,
+    Ca: 1.00,
+    Sc: 1.36,
+    Ti: 1.54,
+    V: 1.63,
+    Cr: 1.66,
+    Mn: 1.55,
+    Fe: 1.83,
+    Co: 1.88,
+    Ni: 1.91,
+    Cu: 1.90,
+    Zn: 1.65,
+    Ga: 1.81,
+    Ge: 2.01,
+    As: 2.18,
+    Se: 2.55,
+    Br: 2.96,
+    Kr: 3.00,
+    Rb: 0.82,
+    Sr: 0.95,
+    Y: 1.22,
+    Zr: 1.33,
+    Nb: 1.60,
+    Mo: 2.16,
+    Tc: 1.90,
+    Ru: 2.20,
+    Rh: 2.28,
+    Pd: 2.20,
+    Ag: 1.93,
+    Cd: 1.69,
+    In: 1.78,
+    Sn: 1.96,
+    Sb: 2.05,
+    Te: 2.10,
+    I: 2.66,
+    Xe: 2.60,
+    Cs: 0.79,
+    Ba: 0.89,
+    La: 1.10,
+    Ce: 1.12,
+    Pr: 1.13,
+    Nd: 1.14,
+    Pm: null,
+    Sm: 1.17,
+    Eu: null,
+    Gd: 1.20,
+    Tb: 1.21,
+    Dy: 1.22,
+    Ho: 1.23,
+    Er: 1.24,
+    Tm: 1.25,
+    Yb: null,
+    Lu: 1.27,
+    Hf: 1.30,
+    Ta: 1.50,
+    W: 2.36,
+    Re: 1.90,
+    Os: 2.20,
+    Ir: 2.20,
+    Pt: 2.28,
+    Au: 2.54,
+    Hg: 2.00,
+    Tl: 1.62,
+    Pb: 1.87,
+    Bi: 2.02,
+    Po: 2.00,
+    At: 2.20,
+    Rn: 2.20,
+    Fr: null,
+    Ra: 0.90,
+    Ac: 1.10,
+    Th: 1.30,
+    Pa: 1.50,
+    U: 1.38,
+    Np: 1.36,
+    Pu: 1.28,
+    Am: 1.30,
+    Cm: 1.28,
+    Bk: 1.30,
+    Cf: 1.30,
+    Es: 1.30,
+    Fm: 1.30,
+    Md: 1.30,
+    No: 1.30,
+    Lr: 1.30,
+    Rf: null,
+    Db: null,
+    Sg: null,
+    Bh: null,
+    Hs: null,
+    Mt: null,
+    Ds: null,
+    Rg: null,
+    Cn: null,
+    Nh: null,
+    Fl: null,
+    Mc: null,
+    Lv: null,
+    Ts: null,
+    Og: null
+};
+
 // Initialize the periodic table
 document.addEventListener('DOMContentLoaded', function() {
     const periodicTable = document.getElementById('periodicTable');
     const searchInput = document.getElementById('searchInput');
     const clearSearch = document.getElementById('clearSearch');
     const categoryFilter = document.getElementById('categoryFilter');
+    const valueDisplay = document.getElementById('valueDisplay');
     const tooltip = document.getElementById('tooltip');
+
+    const elementByPosition = new Map();
+    for (const el of elements) {
+        if (el.period && el.group) {
+            elementByPosition.set(`${el.period}-${el.group}`, el);
+            continue;
+        }
+
+        if (el.category === 'lanthanide' && !el.group) {
+            const col = 3 + (el.atomicNumber - 57);
+            if (col >= 3 && col <= 16) {
+                elementByPosition.set(`8-${col}`, el);
+            } else {
+                const col2 = 3 + (el.atomicNumber - 71);
+                if (col2 >= 3 && col2 <= 16) {
+                    elementByPosition.set(`9-${col2}`, el);
+                }
+            }
+            continue;
+        }
+
+        if (el.category === 'actinide' && !el.group) {
+            const col = 3 + (el.atomicNumber - 89);
+            if (col >= 3 && col <= 16) {
+                elementByPosition.set(`8-${col}`, el);
+            } else {
+                const col2 = 3 + (el.atomicNumber - 103);
+                if (col2 >= 3 && col2 <= 16) {
+                    elementByPosition.set(`9-${col2}`, el);
+                }
+            }
+        }
+    }
+
+    let elementNodes = [];
+
+    let tooltipRaf = 0;
+    let lastMouseX = 0;
+    let lastMouseY = 0;
+    let lastMouseClientX = 0;
+    let lastMouseClientY = 0;
+    let tooltipWidth = 0;
+    let tooltipHeight = 0;
+
+    const supportsHover = !!(window.matchMedia && window.matchMedia('(hover: hover) and (pointer: fine)').matches);
+
+    function formatTileValue(element, mode) {
+        if (mode === 'electronegativity') {
+            const en = electronegativityBySymbol[element.symbol];
+            return en == null ? '—' : en.toFixed(2);
+        }
+        return element.atomicMass.toFixed(3);
+    }
+
+    function updateDisplayedValues() {
+        const mode = valueDisplay.value;
+        elementNodes.forEach(node => {
+            const valueEl = node.querySelector('.atomic-mass');
+            if (!valueEl) return;
+
+            if (mode === 'electronegativity') {
+                const en = node.dataset.electronegativity;
+                valueEl.textContent = en ? Number(en).toFixed(2) : '—';
+                return;
+            }
+
+            valueEl.textContent = Number(node.dataset.atomicMass).toFixed(3);
+        });
+    }
 
     // Create the periodic table grid
     function createPeriodicTable() {
         periodicTable.innerHTML = '';
+        const fragment = document.createDocumentFragment();
         
         // Create empty cells for proper layout
         for (let row = 1; row <= 10; row++) {
@@ -141,44 +333,22 @@ document.addEventListener('DOMContentLoaded', function() {
                 cell.style.gridColumn = col;
                 
                 // Find element for this position
-                const element = elements.find(el => {
-                    // Main table elements with defined groups
-                    if (el.period === row && el.group === col) return true;
-                    
-                    // Handle lanthanides (period 6, rows 8-9)
-                    if (el.category === 'lanthanide' && !el.group) {
-                        if (row === 8 && col >= 3 && col <= 16) {
-                            return el.atomicNumber === 57 + (col - 3);
-                        }
-                        if (row === 9 && col >= 3 && col <= 16) {
-                            return el.atomicNumber === 71 + (col - 3);
-                        }
-                    }
-                    
-                    // Handle actinides (period 7, rows 8-9)
-                    if (el.category === 'actinide' && !el.group) {
-                        if (row === 8 && col >= 3 && col <= 16) {
-                            return el.atomicNumber === 89 + (col - 3);
-                        }
-                        if (row === 9 && col >= 3 && col <= 16) {
-                            return el.atomicNumber === 103 + (col - 3);
-                        }
-                    }
-                    
-                    return false;
-                });
+                const element = elementByPosition.get(`${row}-${col}`);
                 
                 if (element) {
                     const elementDiv = createElement(element);
                     // Set grid position for the element
                     elementDiv.style.gridRow = row;
                     elementDiv.style.gridColumn = col;
-                    periodicTable.appendChild(elementDiv);
+                    fragment.appendChild(elementDiv);
                 } else {
-                    periodicTable.appendChild(cell);
+                    fragment.appendChild(cell);
                 }
             }
         }
+
+        periodicTable.appendChild(fragment);
+        elementNodes = periodicTable.querySelectorAll('.element');
     }
 
     // Create individual element element
@@ -188,7 +358,10 @@ document.addEventListener('DOMContentLoaded', function() {
         elementDiv.dataset.symbol = element.symbol;
         elementDiv.dataset.name = element.name;
         elementDiv.dataset.atomicNumber = element.atomicNumber;
+        elementDiv.dataset.atomicMass = element.atomicMass;
         elementDiv.dataset.category = element.category;
+        const en = electronegativityBySymbol[element.symbol];
+        elementDiv.dataset.electronegativity = en == null ? '' : String(en);
         
         // Create a link wrapper for Wikipedia
         const elementLink = document.createElement('a');
@@ -201,13 +374,15 @@ document.addEventListener('DOMContentLoaded', function() {
             <span class="atomic-number">${element.atomicNumber}</span>
             <span class="symbol">${element.symbol}</span>
             <span class="name">${element.name}</span>
-            <span class="atomic-mass">${element.atomicMass.toFixed(3)}</span>
+            <span class="atomic-mass">${formatTileValue(element, valueDisplay.value)}</span>
         `;
         
         // Add hover events for tooltip
-        elementDiv.addEventListener('mouseenter', (e) => showTooltip(e, element));
-        elementDiv.addEventListener('mouseleave', hideTooltip);
-        elementDiv.addEventListener('mousemove', (e) => moveTooltip(e));
+        if (supportsHover) {
+            elementDiv.addEventListener('mouseenter', (e) => showTooltip(e, element));
+            elementDiv.addEventListener('mouseleave', hideTooltip);
+            elementDiv.addEventListener('mousemove', (e) => moveTooltip(e));
+        }
         
         // Prevent link click from interfering with hover
         elementLink.addEventListener('click', (e) => {
@@ -221,10 +396,12 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Tooltip functions
     function showTooltip(event, element) {
+        const en = electronegativityBySymbol[element.symbol];
         tooltip.innerHTML = `
             <h3>${element.name} (${element.symbol})</h3>
             <p><strong>Atomic Number:</strong> ${element.atomicNumber}</p>
             <p><strong>Atomic Mass:</strong> ${element.atomicMass.toFixed(3)}</p>
+            <p><strong>Electronegativity:</strong> ${en == null ? 'N/A' : en.toFixed(2)}</p>
             <p><strong>Category:</strong> ${formatCategory(element.category)}</p>
             <p><strong>Period:</strong> ${element.period}</p>
             <p><strong>Group:</strong> ${element.group || 'N/A'}</p>
@@ -233,28 +410,49 @@ document.addEventListener('DOMContentLoaded', function() {
             </p>
         `;
         tooltip.classList.add('show');
+        const rect = tooltip.getBoundingClientRect();
+        tooltipWidth = rect.width;
+        tooltipHeight = rect.height;
         moveTooltip(event);
     }
 
     function hideTooltip() {
         tooltip.classList.remove('show');
+        if (tooltipRaf) {
+            cancelAnimationFrame(tooltipRaf);
+            tooltipRaf = 0;
+        }
+        tooltipWidth = 0;
+        tooltipHeight = 0;
     }
 
     function moveTooltip(event) {
-        const x = event.pageX + 10;
-        const y = event.pageY + 10;
-        
-        tooltip.style.left = x + 'px';
-        tooltip.style.top = y + 'px';
-        
-        // Keep tooltip within viewport
-        const rect = tooltip.getBoundingClientRect();
-        if (rect.right > window.innerWidth) {
-            tooltip.style.left = (event.pageX - rect.width - 10) + 'px';
-        }
-        if (rect.bottom > window.innerHeight) {
-            tooltip.style.top = (event.pageY - rect.height - 10) + 'px';
-        }
+        lastMouseX = event.pageX;
+        lastMouseY = event.pageY;
+        lastMouseClientX = event.clientX;
+        lastMouseClientY = event.clientY;
+
+        if (tooltipRaf) return;
+        tooltipRaf = requestAnimationFrame(() => {
+            tooltipRaf = 0;
+
+            let x = lastMouseX + 10;
+            let y = lastMouseY + 10;
+
+            if (tooltipWidth) {
+                if (lastMouseClientX + 10 + tooltipWidth > window.innerWidth) {
+                    x = lastMouseX - tooltipWidth - 10;
+                }
+            }
+            if (tooltipHeight) {
+                if (lastMouseClientY + 10 + tooltipHeight > window.innerHeight) {
+                    y = lastMouseY - tooltipHeight - 10;
+                }
+            }
+
+            tooltip.style.left = x + 'px';
+            tooltip.style.top = y + 'px';
+        });
     }
 
     // Format category name
@@ -267,7 +465,7 @@ document.addEventListener('DOMContentLoaded', function() {
     // Search functionality
     function searchElements() {
         const searchTerm = searchInput.value.toLowerCase();
-        const elements = document.querySelectorAll('.element');
+        const elements = elementNodes;
         
         elements.forEach(element => {
             const symbol = element.dataset.symbol.toLowerCase();
@@ -289,7 +487,7 @@ document.addEventListener('DOMContentLoaded', function() {
     // Filter functionality
     function filterElements() {
         const selectedCategory = categoryFilter.value;
-        const elements = document.querySelectorAll('.element');
+        const elements = elementNodes;
         
         elements.forEach(element => {
             const elementCategory = element.dataset.category;
@@ -312,9 +510,11 @@ document.addEventListener('DOMContentLoaded', function() {
     searchInput.addEventListener('input', searchElements);
     clearSearch.addEventListener('click', clearSearchInput);
     categoryFilter.addEventListener('change', filterElements);
+    valueDisplay.addEventListener('change', updateDisplayedValues);
 
     // Initialize the table
     createPeriodicTable();
+    updateDisplayedValues();
 });
 
 // Glossary toggle function

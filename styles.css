@@ -126,7 +126,7 @@ main {
     align-items: center;
 }
 
-#clearSearch, #categoryFilter, .glossary-close {
+#clearSearch, #categoryFilter, #valueDisplay, .glossary-close {
     color: #ffffff;
     background: linear-gradient(135deg, rgba(124, 77, 255, 0.2) 0%, rgba(138, 43, 226, 0.2) 100%);
     border: 1px solid rgba(124, 77, 255, 0.4);
@@ -144,7 +144,7 @@ main {
     height: fit-content;
 }
 
-#clearSearch::before, #categoryFilter::before, .glossary-close::before {
+#clearSearch::before, #categoryFilter::before, #valueDisplay::before, .glossary-close::before {
     content: '';
     position: absolute;
     top: 0;
@@ -155,7 +155,7 @@ main {
     transition: left 0.6s ease;
 }
 
-#clearSearch:hover, #categoryFilter:hover, .glossary-close:hover {
+#clearSearch:hover, #categoryFilter:hover, #valueDisplay:hover, .glossary-close:hover {
     background: linear-gradient(135deg, rgba(124, 77, 255, 0.3) 0%, rgba(138, 43, 226, 0.3) 100%);
     border-color: rgba(124, 77, 255, 0.6);
     transform: translateY(-2px) scale(1.02);
@@ -165,11 +165,11 @@ main {
         inset 0 0 15px rgba(255, 255, 255, 0.1);
 }
 
-#clearSearch:hover::before, #categoryFilter:hover::before, .glossary-close:hover::before {
+#clearSearch:hover::before, #categoryFilter:hover::before, #valueDisplay:hover::before, .glossary-close:hover::before {
     left: 100%;
 }
 
-#clearSearch:active, #categoryFilter:active, .glossary-close:active {
+#clearSearch:active, #categoryFilter:active, #valueDisplay:active, .glossary-close:active {
     transform: translateY(0) scale(0.98);
     box-shadow: 
         0 4px 15px rgba(124, 77, 255, 0.3),
@@ -212,6 +212,22 @@ main {
 }
 
 #categoryFilter option {
+    background: #1a1a1a;
+    color: #ffffff;
+    text-shadow: none;
+}
+
+#valueDisplay {
+    appearance: none;
+    background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6,9 12,15 18,9'%3e%3c/polyline%3e%3c/svg%3e");
+    background-repeat: no-repeat;
+    background-position: right 0.7rem center;
+    background-size: 1.2em;
+    background-origin: border-box;
+    background-clip: border-box;
+}
+
+#valueDisplay option {
     background: #1a1a1a;
     color: #ffffff;
     text-shadow: none;
@@ -311,7 +327,8 @@ main {
 
 .atomic-number {
     font-size: 0.7rem;
-    color: rgba(255, 255, 255, 0.5);
+    color: currentColor;
+    opacity: 0.75;
     position: absolute;
     top: 4px;
     left: 6px;
@@ -1046,7 +1063,7 @@ footer {
         flex: 1;
     }
     
-    #categoryFilter {
+    #categoryFilter, #valueDisplay {
         width: 100%;
         max-width: 350px;
     }
@@ -1144,7 +1161,7 @@ footer {
         padding: 0.6rem 0.8rem;
     }
     
-    #clearSearch, #categoryFilter {
+    #clearSearch, #categoryFilter, #valueDisplay {
         padding: 0.6rem 1rem;
         font-size: 0.9rem;
     }
@@ -1373,6 +1390,58 @@ footer {
 ::-webkit-scrollbar {
     width: 8px;
     height: 8px;
+}
+
+@media (hover: none) and (pointer: coarse) {
+    header,
+    .search-container,
+    #clearSearch,
+    #categoryFilter,
+    .periodic-table,
+    .element,
+    .tooltip {
+        backdrop-filter: none;
+        -webkit-backdrop-filter: none;
+    }
+
+    header h1 i {
+        animation: none;
+    }
+
+    .element {
+        transition: none;
+        transform: none;
+        box-shadow: none !important;
+    }
+
+    .element::before,
+    .element::after {
+        display: none;
+    }
+
+    .element:hover {
+        transform: none;
+        box-shadow: none !important;
+        border-color: rgba(255, 255, 255, 0.1);
+    }
+
+    .symbol {
+        text-shadow: none;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation: none !important;
+        transition: none !important;
+        scroll-behavior: auto !important;
+    }
+
+    .element:hover {
+        transform: none;
+    }
 }
 
 ::-webkit-scrollbar-track {
