@@ -6,8 +6,8 @@
     <title>Atomix - Interactive Periodic Table of Elements</title>
     
     <!-- SEO Meta Tags -->
-    <meta name="description" content="Explore the fascinating world of chemistry with 118 interactive elements, real-time visualizations, and comprehensive chemical data.">
-    <meta name="keywords" content="periodic table, chemistry, elements, science education, interactive, atoms, molecules, chemical elements, learning, students, teachers">
+    <meta name="description" content="Atomix v2.0.0 - Interactive periodic table of elements with 118 chemical elements, search, filtering, comprehensive chemistry data, and full bilingual support (English/French).">
+    <meta name="keywords" content="periodic table, chemistry, elements, science education, interactive, atoms, molecules, chemical elements, learning, students, teachers, i18n, french, english, bilingual">
     <meta name="author" content="Independent-Coder">
     <meta name="robots" content="index, follow">
     <meta name="language" content="English">
@@ -17,12 +17,12 @@
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://independent-coder.github.io/Atomix">
-    <meta property="og:title" content="Atomix - Interactive Periodic Table of Elements">
-    <meta property="og:description" content="Explore the fascinating world of chemistry with 118 interactive elements, real-time visualizations, and comprehensive chemical data.">
+    <meta property="og:title" content="Atomix v2.0.0 - Interactive Periodic Table of Elements">
+    <meta property="og:description" content="Explore the fascinating world of chemistry with 118 interactive elements, real-time visualizations, comprehensive chemical data, and full bilingual support.">
     <meta property="og:image" content="https://independent-coder.github.io/Atomix/assets/og-image.png">
     <meta property="og:image:width" content="1200">
     <meta property="og:image:height" content="630">
-    <meta property="og:image:alt" content="Atomix Interactive Periodic Table">
+    <meta property="og:image:alt" content="Atomix v2.0.0 Interactive Periodic Table">
     <meta property="og:site_name" content="Atomix">
     <meta property="og:locale" content="en_US">
     
@@ -95,7 +95,7 @@
 <body>
     <header>
         <h1><i class="fas fa-atom"></i> Atomix</h1>
-        <p>Interactive Periodic Table of Elements</p>
+        <p class="subtitle">Interactive Periodic Table of Elements</p>
     </header>
 
     <main>
@@ -128,6 +128,13 @@
                     <option value="electronegativity">Electronegativity</option>
                 </select>
             </div>
+
+            <div class="filter-container">
+                <select id="languageSwitcher">
+                    <option value="en">🇬🇧 English</option>
+                    <option value="fr">🇫🇷 Français</option>
+                </select>
+            </div>
         </section>
 
         <div class="periodic-table-container">
@@ -138,17 +145,22 @@
 
         <!-- About Section -->
         <section class="about">
-            <h2>What is Atomix?</h2>
-            <p>
-                Atomix is an interactive periodic table of elements built with modern web technologies. 
-                It allows you to explore all 118 chemical elements with real-time visualizations, 
-                comprehensive data, and intuitive interactions. Features include color-coded element categories, 
-                advanced search and filtering, interactive hover tooltips with detailed information, 
-                and direct Wikipedia links for deeper learning. The application also includes a comprehensive 
-                chemistry glossary covering element categories, atomic properties, and fundamental chemical concepts. 
-                Perfect for students, educators, and science enthusiasts, Atomix makes learning chemistry 
-                engaging and accessible with its sleek dark theme design and fully responsive layout.
+            <h2>About Atomix</h2>
+            <p class="description">
+                Atomix is an interactive periodic table that brings the elements to life. Explore the building blocks of matter with detailed information, beautiful visualizations, and intuitive search capabilities.
             </p>
+            
+            <div class="features">
+                <h3>Features</h3>
+                <ul>
+                    <li>Interactive element tiles with detailed information</li>
+                    <li>Powerful search by element name, symbol, or atomic number</li>
+                    <li>Filter elements by category</li>
+                    <li>Responsive design for all devices</li>
+                    <li>Optimized performance for smooth interactions</li>
+                </ul>
+            </div>
+            </div>
         </section>
 
         <div class="tooltip" id="tooltip"></div>
@@ -316,8 +328,7 @@
         <div class="footer-bottom">
             <div class="footer-bottom-content">
                 <p class="copyright">
-                    <i class="far fa-copyright"></i>
-                    2026 Atomix v1.0.1. All rights reserved. 
+                    © 2026 Atomix v2.0.0. All rights reserved.
                 </p>
                 <p class="made-by">
                     Made with <i class="fas fa-heart"></i> by 
@@ -327,6 +338,6 @@
         </div>
     </footer>
 
-    <script src="script.js"></script>
+    <script type="module" src="js/main.js"></script>
 </body>
 </html>

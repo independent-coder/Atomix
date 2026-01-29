@@ -6,15 +6,37 @@
 
 **Interactive Periodic Table of Elements**
 
-Explore the fascinating world of chemistry with 118 interactive elements, real-time visualizations, and comprehensive chemical data.
+Explore the fascinating world of chemistry with 118 interactive elements, real-time visualizations, comprehensive chemical data, and full bilingual support.
 <a href="https://independent-coder.github.io/Atomix/">Live Demo</a>
 
 [![Live Demo](https://img.shields.io/badge/Live-Demo-7c4dff&logo=html5)](https://independent-coder.github.io/Atomix/)
 [![GitHub](https://img.shields.io/badge/GitHub-Repository-7b2ff7&logo=github)](https://github.com/independent-coder/Atomix)
 [![License](https://img.shields.io/badge/License-MIT-green)](LICENSE)
+[![Version](https://img.shields.io/badge/Version-2.0.0-blue)](https://github.com/independent-coder/Atomix/releases)
 [![Visitor Count](https://visitor-badge.laobi.icu/badge?page_id=Independent-Coder.Atomix)](https://visitor-badge.laobi.icu/?page_id=Independent-Coder.Atomix)
 
 </div>
+
+## 🌍 What's New in v2.0.0
+
+### 🎯 Major Features
+- **🌐 Complete Internationalization**: Full French and English support
+- **🔄 Modular Architecture**: Completely refactored codebase for better maintainability
+- **📱 Enhanced Performance**: Optimized interactions and smoother animations
+- **🎨 Improved UI**: Consistent styling and better user experience
+
+### 🌐 Internationalization (i18n)
+- **🇬🇧🇫🇷 Bilingual Support**: Complete French and English translations
+- **🔤 Element Names**: All 118 elements translated to French
+- **📝 UI Translation**: Every interface element localized
+- **🔄 Dynamic Switching**: Instant language changes without page reload
+- **💾 Persistent Settings**: Language preference saved automatically
+
+### 🏗️ Architecture Improvements
+- **📦 Modular JavaScript**: Split into focused, maintainable modules
+- **🔧 Clean Code**: Better separation of concerns and improved readability
+- **⚡ Performance**: Optimized DOM manipulation and event handling
+- **🛠️ Developer Experience**: Easier to extend and maintain
 
 ## Screenshots and Demos
 
@@ -28,7 +50,7 @@ Explore the fascinating world of chemistry with 118 interactive elements, real-t
 
 ### 🧪 Element Exploration
 - **📊 Complete Periodic Table**: All 118 chemical elements with accurate positioning
-- **🔍 Advanced Search**: Find elements by name, symbol, or atomic number
+- **🔍 Advanced Search**: Find elements by name, symbol, or atomic number (supports both languages)
 - **🎯 Smart Filtering**: Filter by element categories (alkali metals, transition metals, etc.)
 - **📱 Touch-Friendly**: Optimized for mobile and tablet devices
 - **🔗 Wikipedia Integration**: Direct links to detailed element information
@@ -40,13 +62,15 @@ Explore the fascinating world of chemistry with 118 interactive elements, real-t
 - **🌟 Smooth Animations**: Professional transitions and micro-interactions
 - **💫 Glowing Effects**: Subtle glow and shadow effects throughout
 - **📱 Responsive Design**: Works perfectly on all screen sizes
+- **🎯 Consistent UI**: Unified styling across all controls and buttons
 
 ### 📚 Educational Features
-- **📖 Comprehensive Glossary**: Detailed chemistry terms and concepts
+- **📖 Comprehensive Glossary**: Detailed chemistry terms and concepts (fully translated)
 - **🔬 Element Categories**: Clear categorization of all element types
 - **⚛️ Atomic Properties**: Complete data for each element
-- **🎓 Interactive Tooltips**: Detailed information on mouse hover
+- **🎓 Interactive Tooltips**: Detailed information on mouse hover (translated)
 - **📊 Visual Learning**: Color-coded elements for better understanding
+- **🌍 Multilingual Learning**: Access chemistry education in both English and French
 
 ### 🎮 Interactive Controls
 - **🔍 Real-time Search**: Instant results as you type

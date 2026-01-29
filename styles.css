@@ -126,7 +126,7 @@ main {
     align-items: center;
 }
 
-#clearSearch, #categoryFilter, #valueDisplay, .glossary-close {
+#clearSearch, #categoryFilter, #valueDisplay, #languageSwitcher, .glossary-close {
     color: #ffffff;
     background: linear-gradient(135deg, rgba(124, 77, 255, 0.2) 0%, rgba(138, 43, 226, 0.2) 100%);
     border: 1px solid rgba(124, 77, 255, 0.4);
@@ -144,7 +144,7 @@ main {
     height: fit-content;
 }
 
-#clearSearch::before, #categoryFilter::before, #valueDisplay::before, .glossary-close::before {
+#clearSearch::before, #categoryFilter::before, #valueDisplay::before, #languageSwitcher::before, .glossary-close::before {
     content: '';
     position: absolute;
     top: 0;
@@ -155,7 +155,7 @@ main {
     transition: left 0.6s ease;
 }
 
-#clearSearch:hover, #categoryFilter:hover, #valueDisplay:hover, .glossary-close:hover {
+#clearSearch:hover, #categoryFilter:hover, #valueDisplay:hover, #languageSwitcher:hover, .glossary-close:hover {
     background: linear-gradient(135deg, rgba(124, 77, 255, 0.3) 0%, rgba(138, 43, 226, 0.3) 100%);
     border-color: rgba(124, 77, 255, 0.6);
     transform: translateY(-2px) scale(1.02);
@@ -165,24 +165,25 @@ main {
         inset 0 0 15px rgba(255, 255, 255, 0.1);
 }
 
-#clearSearch:hover::before, #categoryFilter:hover::before, #valueDisplay:hover::before, .glossary-close:hover::before {
+#clearSearch:hover::before, #categoryFilter:hover::before, #valueDisplay:hover::before, #languageSwitcher:hover::before, .glossary-close:hover::before {
     left: 100%;
 }
 
-#clearSearch:active, #categoryFilter:active, #valueDisplay:active, .glossary-close:active {
+#clearSearch:active, #categoryFilter:active, #valueDisplay:active, #languageSwitcher:active, .glossary-close:active {
     transform: translateY(0) scale(0.98);
     box-shadow: 
         0 4px 15px rgba(124, 77, 255, 0.3),
         inset 0 0 10px rgba(0, 0, 0, 0.2);
 }
 
-#clearSearch i, #categoryFilter option, .glossary-close i {
+#clearSearch i, #categoryFilter option, #languageSwitcher option, .glossary-close i {
     color: #ffffff;
     text-shadow: 0 0 15px rgba(124, 77, 255, 0.8);
 }
 
 /* Special styling for select dropdown */
-#categoryFilter {
+#categoryFilter,
+#languageSwitcher {
     appearance: none;
     background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6,9 12,15 18,9'%3e%3c/polyline%3e%3c/svg%3e");
     background-repeat: no-repeat;
@@ -193,7 +194,8 @@ main {
     background-clip: border-box;
 }
 
-#categoryFilter:hover {
+#categoryFilter:hover,
+#languageSwitcher:hover {
     background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6,9 12,15 18,9'%3e%3c/polyline%3e%3c/svg%3e");
     background-repeat: no-repeat;
     background-position: right 0.7rem center;
@@ -202,7 +204,8 @@ main {
     background-clip: border-box;
 }
 
-#categoryFilter:active {
+#categoryFilter:active,
+#languageSwitcher:active {
     background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6,9 12,15 18,9'%3e%3c/polyline%3e%3c/svg%3e");
     background-repeat: no-repeat;
     background-position: right 0.7rem center;
@@ -211,7 +214,8 @@ main {
     background-clip: border-box;
 }
 
-#categoryFilter option {
+#categoryFilter option,
+#languageSwitcher option {
     background: #1a1a1a;
     color: #ffffff;
     text-shadow: none;
@@ -219,6 +223,25 @@ main {
 
 #valueDisplay {
     appearance: none;
+    background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6,9 12,15 18,9'%3e%3c/polyline%3e%3c/svg%3e");
+    background-repeat: no-repeat;
+    background-position: right 0.7rem center;
+    background-size: 1.2em;
+    padding-right: 2.5rem;
+    background-origin: border-box;
+    background-clip: border-box;
+}
+
+#valueDisplay:hover {
+    background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6,9 12,15 18,9'%3e%3c/polyline%3e%3c/svg%3e");
+    background-repeat: no-repeat;
+    background-position: right 0.7rem center;
+    background-size: 1.2em;
+    background-origin: border-box;
+    background-clip: border-box;
+}
+
+#valueDisplay:active {
     background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6,9 12,15 18,9'%3e%3c/polyline%3e%3c/svg%3e");
     background-repeat: no-repeat;
     background-position: right 0.7rem center;
@@ -349,8 +372,9 @@ main {
 }
 
 .atomic-mass {
-    font-size: 0.5rem;
-    color: rgba(255, 255, 255, 0.4);
+    font-size: 0.6rem;
+    color: currentColor;
+    opacity: 0.6;
     position: absolute;
     bottom: 4px;
     right: 6px;
@@ -1063,7 +1087,7 @@ footer {
         flex: 1;
     }
     
-    #categoryFilter, #valueDisplay {
+    #categoryFilter, #valueDisplay, #languageSwitcher {
         width: 100%;
         max-width: 350px;
     }
@@ -1161,7 +1185,7 @@ footer {
         padding: 0.6rem 0.8rem;
     }
     
-    #clearSearch, #categoryFilter, #valueDisplay {
+    #clearSearch, #categoryFilter, #valueDisplay, #languageSwitcher {
         padding: 0.6rem 1rem;
         font-size: 0.9rem;
     }
@@ -1399,7 +1423,8 @@ footer {
     #categoryFilter,
     .periodic-table,
     .element,
-    .tooltip {
+    .tooltip,
+    .language-switcher {
         backdrop-filter: none;
         -webkit-backdrop-filter: none;
     }
