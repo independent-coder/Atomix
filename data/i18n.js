@@ -163,7 +163,7 @@ export const translations = {
         },
         // Footer
         footer: {
-            copyright: "© 2026 Atomix v2.0.0. All rights reserved.",
+            copyright: "© 2026 Atomix v2.0.1. All rights reserved.",
             madeBy: "Made with ❤️ by",
             links: {
                 github: "GitHub",
@@ -481,7 +481,7 @@ export const translations = {
         },
         // Footer
         footer: {
-            copyright: "© 2026 Atomix v2.0.0. Tous droits réservés.",
+            copyright: "© 2026 Atomix v2.0.1. Tous droits réservés.",
             madeBy: "Fait avec ❤️ par",
             links: {
                 github: "GitHub",

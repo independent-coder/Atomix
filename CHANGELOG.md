@@ -6,6 +6,17 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 
+## [v2.0.1] - 2026-01-28
+
+### Added
+- **IPA Transcription**: Added /ˈætəmɪks/ pronunciation guide under the main title
+- **Responsive IPA Styling**: Proper scaling of IPA text across all device sizes
+- **Monospace Font**: Used Courier New for accurate phonetic transcription display
+
+### Enhanced
+- **Visual Hierarchy**: Improved header layout with proper spacing for IPA text
+- **Typography**: Enhanced readability with appropriate letter spacing and opacity
+
 ## [v2.0.0] - 2026-01-28
 
 ### Major Release - Complete Internationalization & Refactoring

@@ -6,7 +6,7 @@
 
 **Interactive Periodic Table of Elements**
 
-Explore the fascinating world of chemistry with 118 interactive elements, real-time visualizations, comprehensive chemical data, and full bilingual support.
+Explore the fascinating world of chemistry with 118 interactive elements, real-time visualizations, comprehensive chemical data, and full bilingual support (French/English).
 <a href="https://independent-coder.github.io/Atomix/">Live Demo</a>
 
 [![Live Demo](https://img.shields.io/badge/Live-Demo-7c4dff&logo=html5)](https://independent-coder.github.io/Atomix/)
@@ -187,7 +187,11 @@ Open your browser and visit: **[https://independent-coder.github.io/independent-
 Atomix/
 ├── index.html          # Main application file
 ├── styles.css          # Styling and animations
-├── script.js           # JavaScript functionality
+├── data/
+│   ├── elements.js     # Element data and constants
+│   └── i18n.js         # Internationalization
+├── js/
+│   └── main.js         # Main JavaScript functionality
 ├── assets/
 │   └── favicon.svg     # Application icon
 ├── README.md           # Project documentation
@@ -221,7 +225,7 @@ Atomix/
 ## 🎨 Customization
 
 ### 🧪 Adding New Elements
-1. **Edit element data** in `script.js` elements array
+1. **Edit element data** in `data/elements.js` elements array
 2. **Add element object** with required properties:
    ```javascript
    {
